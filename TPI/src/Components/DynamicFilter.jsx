@@ -2,7 +2,7 @@ import "./Css/DynamicFilter.css"
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Importar los estilos de react-datepicker
+import 'react-datepicker/dist/react-datepicker.css';
 
 const DynamicFilter = ({ fields, onSearch }) => {
 
@@ -30,22 +30,20 @@ const DynamicFilter = ({ fields, onSearch }) => {
         {fields.map(({ name, type }) => (
           <div key={name} className='field-container'>
             {type === 'date' ? (
-              // Selector de fecha con react-datepicker
               <DatePicker
                 selected={filters[name] || null}
                 onChange={(date) => handleChange(name, date)}
                 placeholderText={name}
                 dateFormat="dd/MM/yyyy"
-                className='date-picker' // Clase para aplicar estilos desde CSS
+                className='field'
               />
             ) : (
-              // Input de texto estándar
               <input
                 type="text"
                 placeholder={name}
                 value={filters[name] || ''}
                 onChange={(e) => handleChange(name, e.target.value)}
-                className='text-input' // Clase para aplicar estilos desde CSS
+                className='field' 
               />
             )}
             <span>(opcional)</span>
