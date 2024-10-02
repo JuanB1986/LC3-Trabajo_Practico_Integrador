@@ -1,11 +1,11 @@
-import Home from "./Pages/Home"
-
+import { ProveedorAutenticacion } from './Components/ContextoAutenticacion';
+import AppRouter from './Routers/AppRouter';
 function App() {
 
   return (
-    <>
-      <Home/>
-    </>
+    <ProveedorAutenticacion>
+        <AppRouter />
+    </ProveedorAutenticacion>
   )
 }
 

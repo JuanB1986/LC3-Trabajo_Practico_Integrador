@@ -11,7 +11,7 @@ const TravelItem = ({ travelId, origen, destino, fecha, hora, asientos, precio }
                 <span className='principal'>{origen} - {destino}</span>
                 <span className='secundario'>Horario: {hora}</span>
                 <span className='secundario'>Asientos disponibles: {asientos}</span>
-                <span className='secundario'> ID del Viaje: #{travelId} </span>
+                <span className='secundario'> Nº de Viaje: {travelId} </span>
             </div>
 
             <div className='right'>
