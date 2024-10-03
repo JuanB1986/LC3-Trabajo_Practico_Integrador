@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import TravelItem from './TravelItem';
+import TravelItem from './TravelItem/TravelItem';
 
 const Travel = ({ travels }) => {
     return (

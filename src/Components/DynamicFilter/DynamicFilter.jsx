@@ -1,4 +1,4 @@
-import "./Css/DynamicFilter.css"
+import styles from "./DynamicFilter.module.css"
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
@@ -26,16 +26,16 @@ const DynamicFilter = ({ fields, onSearch }) => {
       <h1>Buscá con quién compartir tu próximo viaje!</h1>
       <h6>¡Elegí fecha, origen o destino y encontralo!</h6>
 
-      <div className='filter-container'>
+      <div className={styles.filter_container}>
         {fields.map(({ name, type }) => (
-          <div key={name} className='field-container'>
+          <div key={name} className={styles.field_container}>
             {type === 'date' ? (
               <DatePicker
                 selected={filters[name] || null}
                 onChange={(date) => handleChange(name, date)}
                 placeholderText={name}
                 dateFormat="dd/MM/yyyy"
-                className='field'
+                className={styles.field}
               />
             ) : (
               <input
@@ -43,13 +43,13 @@ const DynamicFilter = ({ fields, onSearch }) => {
                 placeholder={name}
                 value={filters[name] || ''}
                 onChange={(e) => handleChange(name, e.target.value)}
-                className='field' 
+                className={styles.field} 
               />
             )}
             <span>(opcional)</span>
           </div>
         ))}
-        <button className='search-button' onClick={handleSearch}>
+        <button className={styles.search_button} onClick={handleSearch}>
           BUSCAR
         </button>
       </div>

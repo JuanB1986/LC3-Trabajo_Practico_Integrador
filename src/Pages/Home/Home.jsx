@@ -1,7 +1,7 @@
-import "./Css/Home.css";
+import styles from "./Home.module.css";
 import { Button } from "react-bootstrap";
-import DynamicFilter from "../Components/DynamicFilter";
-import Travel from "../Components/Travel";
+import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
+import Travel from "../../Components/Travel";
 
 const travels = [
     {
@@ -56,23 +56,23 @@ const Home = () => {
     };
     return (
         <>
-            <header>
-                <span>TravelRos</span>
+            <header className={styles.header}>
+                <span className={styles.header_span}>TravelRos</span>
                 <div>
                     <Button variant="outline-success">Iniciar Sesión</Button>
                 </div>
             </header>
 
-            <hr className="linea" />
-            <div className="filter">
+            <hr className={styles.linea} />
+            <div className={styles.filter}>
                 <DynamicFilter fields={filterFields1} onSearch={handleSearch} />
             </div>
-            <hr className="linea" />
+            <hr className={styles.linea} />
 
-            <div className="contenedor2">
+            <div className={styles.contenedor2}>
                 <Travel travels={travels}/>
             </div>
-            <footer>
+            <footer className={styles.footer}>
 
             </footer>
         </>

@@ -12,20 +12,20 @@
 
 }
 
-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px 60px;
 
 }
-header span{
+.header_span{
     font-size: 27px;
     font-family: 'Times New Roman', Times, serif;
     color: #426B1F;
 }
 
-footer {
+.footer {
     background-color: #f2f2f2;
     height: 50px;
 }

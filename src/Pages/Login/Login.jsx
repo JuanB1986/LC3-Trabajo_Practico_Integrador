@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAutenticacion } from '../Components/ContextoAutenticacion';
-import '../Pages/Css/Login.css'
+import { useAutenticacion } from '../../Components/ContextoAutenticacion';
+import styles from './Login.module.css'
 
 const Login = () => {
     const { login } = useAutenticacion();
@@ -32,34 +32,34 @@ const Login = () => {
 
     return (
         
-        <div className='Login_fondo'>   
+        <div className={styles.Login_fondo}>   
 
-            <div id='Login_contenedor'>
-                <h2 id='Login_titulo'>Login</h2>
+            <div id={styles.Login_contenedor}>
+                <h2 id={styles.Login_titulo}>Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label className='Login_label' htmlFor="usuario">Usuario:</label>
+                        <label className={styles.Login_label} htmlFor="usuario">Usuario:</label>
                         <br></br>
                         <input
                             type="text"
-                            className="Login_input"
+                            className={styles.Login_input}
                             value={usuario}
                             onChange={(e) => setUsuario(e.target.value)}
                             required
                         />
                     </div>
                     <div>
-                        <label className='Login_label' htmlFor="password">Contraseña:</label>
+                        <label className={styles.Login_label} htmlFor="password">Contraseña:</label>
                         <br></br>
                         <input
                             type="password"
-                            className="Login_input"
+                            className={styles.Login_input}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>                
-                    <button id ='Login_loginButton' type="submit">Iniciar sesión</button>
+                    <button id ={styles.Login_loginButton} type="submit">Iniciar sesión</button>
                     {error && <p id='Login_errorLabel'>{error}</p>}
                 </form>
             </div>    

@@ -39,7 +39,7 @@
     font-weight: bold;
 }
 
-.delete-button {
+.delete_button {
     color: white;
     background-color: #426B1F;
     border: none;
@@ -48,6 +48,6 @@
     cursor: pointer;
 }
 
-.delete-button:hover {
+.delete_button:hover {
     background-color: #314f17;
 }
