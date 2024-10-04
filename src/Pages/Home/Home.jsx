@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
 import Travel from "../../Components/Travel";
 
+import ListaPasajeros from "../../Components/getPassangerList.jsx";
+
 const travels = [
     {
       id: 1,
@@ -56,6 +58,7 @@ const Home = () => {
     };
     return (
         <>
+          <ListaPasajeros></ListaPasajeros>
             <header className={styles.header}>
                 <span className={styles.header_span}>TravelRos</span>
                 <div>
