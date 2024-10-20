@@ -1,13 +1,8 @@
-import styles from "./Home.module.css";
+import styles from "./Mytravels.module.css";
 import { Button } from "react-bootstrap";
-import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
-import Travel from "../../Components/Travel";
-import { useAutenticacion } from '../../Components/ContextoAutenticacion';
-import ListaPasajeros from "../../Components/getPassangerList.jsx";
-import TravelRegisterForm from '../../Components/Forms/Travel/TravelRegisterForm.jsx'
+import Travel from "../../Components/Travel.jsx";
+import { useAutenticacion } from '../../Components/ContextoAutenticacion.jsx';
 
-
-import { useNavigate } from 'react-router-dom';
 
 const travels = [
     {
@@ -49,7 +44,7 @@ const travels = [
   ];
  
 
-const Home = () => { 
+const MyReservations = () => { 
     const filterFields1 = [
         { name: 'Origen', type: 'text' },
         { name: 'Destino', type: 'text' },
@@ -64,29 +59,23 @@ const Home = () => {
 
     const { login, logout } = useAutenticacion();
 
-    const navigate = useNavigate();
-
     const handleInicio = () =>{
-
-      navigate('/iniciar-sesion');
-      
+      logout();
     }
 
 
     return (
         <>
             <header className={styles.header}>
-                <span className={styles.header_span}>TravelRos</span>
-                <div>
-                    <Button onClick={handleInicio} variant="outline-success">Iniciar Sesión</Button>
-                </div>
+              <span className={styles.header_span}>TravelRos</span>
+              <div>
+                  <Button onClick={handleInicio} variant="outline-success">Cerrar Sesión</Button>
+              </div>
             </header>
+            
+            <hr className={styles.linea} />
 
-            <hr className={styles.linea} />
-            <div className={styles.filter}>
-                <DynamicFilter fields={filterFields1} onSearch={handleSearch} />
-            </div>
-            <hr className={styles.linea} />
+            <h1 id={styles.subtitulo} >Mis Viajes</h1>
 
             <div className={styles.contenedor2}>
                 <Travel travels={travels}/>
@@ -98,4 +87,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default MyReservations

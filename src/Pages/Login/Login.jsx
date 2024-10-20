@@ -23,11 +23,40 @@ const Login = () => {
             const fakeToken = '1234567890abcdef'; 
             login(fakeToken);
             
+            localStorage.setItem("UserRole","admin");
+
             const from = location.state?.from?.pathname || '/inicio';
             navigate(from, { replace: true });
         } else {
             setError('Usuario o contraseña incorrectos.');
         }
+
+        if (usuario === 'conductor' && password === '123') {
+            const fakeToken = '1234567890abcdef'; 
+            login(fakeToken);
+            
+            localStorage.setItem("UserRole","conductor");
+
+            const from = location.state?.from?.pathname || '/inicio';
+            navigate(from, { replace: true });
+        } else {
+            setError('Usuario o contraseña incorrectos.');
+        }
+
+        if (usuario === 'pasajero' && password === '123') {
+            const fakeToken = '1234567890abcdef'; 
+            login(fakeToken);
+            
+            localStorage.setItem("UserRole","pasajero");
+
+            const from = location.state?.from?.pathname || '/inicio';
+            navigate(from, { replace: true });
+        } else {
+            setError('Usuario o contraseña incorrectos.');
+        }
+
+
+
     };
 
     return (
@@ -35,32 +64,16 @@ const Login = () => {
         <div className={styles.Login_fondo}>   
 
             <div id={styles.Login_contenedor}>
-                <h2 id={styles.Login_titulo}>Login</h2>
+                <h3 id={styles.Login_titulo}>Login</h3>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label className={styles.Login_label} htmlFor="usuario">Usuario:</label>
-                        <br></br>
-                        <input
-                            type="text"
-                            className={styles.Login_input}
-                            value={usuario}
-                            onChange={(e) => setUsuario(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label className={styles.Login_label} htmlFor="password">Contraseña:</label>
-                        <br></br>
-                        <input
-                            type="password"
-                            className={styles.Login_input}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>                
+
+                    <input type="text" className={styles.Login_input} placeholder='Usuario' value={usuario} onChange={(e) => setUsuario(e.target.value)} required />
+                    <input type="password" className={styles.Login_input} placeholder='Contraseña' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    
                     <button id ={styles.Login_loginButton} type="submit">Iniciar sesión</button>
-                    {error && <p id='Login_errorLabel'>{error}</p>}
+                    
+                    {error && <p id={styles.Login_errorLabel}>{error}</p>}
+
                 </form>
             </div>    
         </div>
