@@ -5,7 +5,7 @@ import DynamicFilter from '../../Components/DynamicFilter/DynamicFilter.jsx';
 import Travel from '../../Components/Travel.jsx';
 import ListaPasajeros from '../../Components/getPassangerList.jsx';
 import styles from './Home.module.css';
-
+import TravelRegisterForm from '../../Components/Forms/Travel/TravelRegisterForm.jsx'
 const travels = [
     {
       id: 1,
@@ -59,7 +59,7 @@ const Home = () => {
 
   return (
     <>
-      <ListaPasajeros />
+      <TravelRegisterForm></TravelRegisterForm>
       <header className={styles.header}>
         <span className={styles.header_span}>TravelRos</span>
         <div>
