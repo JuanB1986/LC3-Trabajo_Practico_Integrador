@@ -34,6 +34,7 @@ const Login = () => {
         
         <div className={styles.Login_fondo}>   
 
+<<<<<<< Updated upstream
             <div id={styles.Login_contenedor}>
                 <h2 id={styles.Login_titulo}>Login</h2>
                 <form onSubmit={handleSubmit}>
@@ -65,6 +66,39 @@ const Login = () => {
             </div>    
         </div>
     );
+=======
+  return (
+    <div className={styles.Form_fondo}>   
+      <div id={styles.Form_contenedor}>
+        <h2 id={styles.Form_titulo}>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label className={styles.Form_label} htmlFor="usuario">Usuario:</label>
+            <input
+              type="text"
+              className={styles.Form_input}
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className={styles.Form_label} htmlFor="password">Contraseña:</label>
+            <input
+              type="password"
+              className={styles.Form_input}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>                
+          <button id={styles.Form_loginButton} type="submit">Iniciar sesión</button>
+          {error && <p id='Form_errorLabel'>{error}</p>}
+        </form>
+      </div>    
+    </div>
+  );
+>>>>>>> Stashed changes
 };
 
 export default Login;

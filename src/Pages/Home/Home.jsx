@@ -1,9 +1,10 @@
-import styles from "./Home.module.css";
-import { Button } from "react-bootstrap";
-import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
-import Travel from "../../Components/Travel";
-
-import ListaPasajeros from "../../Components/getPassangerList.jsx";
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import useAutenticacion from '../../hooks/useAtenticacion.js';
+import DynamicFilter from '../../Components/DynamicFilter/DynamicFilter.jsx';
+import Travel from '../../Components/Travel.jsx';
+import ListaPasajeros from '../../Components/getPassangerList.jsx';
+import styles from './Home.module.css';
 
 const travels = [
     {
@@ -52,34 +53,34 @@ const Home = () => {
         { name: 'Fecha', type: 'date' },
       ];
 
-    // Función para manejar la búsqueda
-    const handleSearch = (filters) => {
-        console.log('Filtros aplicados:', filters);
-    };
-    return (
-        <>
-          <ListaPasajeros></ListaPasajeros>
-            <header className={styles.header}>
-                <span className={styles.header_span}>TravelRos</span>
-                <div>
-                    <Button variant="outline-success">Iniciar Sesión</Button>
-                </div>
-            </header>
+  const handleSearch = (filters) => {
+    console.log('Filtros aplicados:', filters);
+  };
 
-            <hr className={styles.linea} />
-            <div className={styles.filter}>
-                <DynamicFilter fields={filterFields1} onSearch={handleSearch} />
-            </div>
-            <hr className={styles.linea} />
-
-            <div className={styles.contenedor2}>
-                <Travel travels={travels}/>
-            </div>
-            <footer className={styles.footer}>
-
-            </footer>
-        </>
-    )
-}
+  return (
+    <>
+      <ListaPasajeros />
+      <header className={styles.header}>
+        <span className={styles.header_span}>TravelRos</span>
+        <div>
+          {isAuthenticated ? (
+            <Button variant="outline-danger" onClick={handleLogout}>Cerrar Sesión</Button>
+          ) : (
+            <Button variant="outline-success" onClick={handleLogin}>Iniciar Sesión</Button>
+          )}
+        </div>
+      </header>
+      <hr className={styles.linea} />
+      <div className={styles.filter}>
+        <DynamicFilter fields={filterFields1} onSearch={handleSearch} />
+      </div>
+      <hr className={styles.linea} />
+      <div className={styles.contenedor2}>
+        <Travel travels={travels} />
+      </div>
+      <footer className={styles.footer}></footer>
+    </>
+  );
+};
 
 export default Home

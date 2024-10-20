@@ -1,5 +1,5 @@
 
-#Login_contenedor{
+#Form_contenedor{
     background-color: rgb(145, 175, 145);
     border-radius: 10px;
     border: 1px solid rgb(79, 97, 80);
@@ -9,7 +9,7 @@
     margin-top: 5%;
 }
 
-.Login_input{
+.Form_input{
     width: 90%;
     height: 25px;
     margin-left: 4%;
@@ -23,20 +23,20 @@
   
 }
 
-.Login_label{
+.Form_label{
     margin-left: 4%;
     color:  rgb(255, 255, 255);
     font-size: medium;
 }
 
 
-#Login_titulo{
+#Form_titulo{
     text-align: center;
     color: rgb(255, 255, 255);
     margin: 0%;
 }
 
-#Login_loginButton{
+#Form_loginButton{
     width: 55%;
     margin-left: 23%;
     margin-top: 0%;
@@ -49,7 +49,7 @@
     color: rgb(254, 254, 254);
 }
 
-#Login_errorLabel{
+#Form_errorLabel{
     text-align: center;
     margin-top: 5px;
     color: rgb(245, 24, 24);
