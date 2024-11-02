@@ -1,8 +1,7 @@
 import styles from "./MyReservations.module.css";
 import { Button } from "react-bootstrap";
-import Travel from "../../Components/Travel.jsx";
-import { useAutenticacion } from '../../Components/ContextoAutenticacion.jsx';
-
+import Travel from "../../Components/Travel/Travel.jsx";
+import { useAutenticacion } from '../../Components/Contexts/ContextoAutenticacion.jsx';
 
 const travels = [
     {

@@ -1,4 +1,4 @@
-import { ProveedorAutenticacion } from './Components/ContextoAutenticacion';
+import { ProveedorAutenticacion } from './Components/Contexts/ContextoAutenticacion';
 import AppRouter from './Routers/AppRouter';
 function App() {
 

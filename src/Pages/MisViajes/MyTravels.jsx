@@ -1,7 +1,7 @@
 import styles from "./Mytravels.module.css";
 import { Button } from "react-bootstrap";
-import Travel from "../../Components/Travel.jsx";
-import { useAutenticacion } from '../../Components/ContextoAutenticacion.jsx';
+import Travel from "../../Components/Travel/Travel.jsx";
+import { useAutenticacion } from '../../Components/Contexts/ContextoAutenticacion.jsx';
 
 
 const travels = [
@@ -45,17 +45,16 @@ const travels = [
  
 
 const MyReservations = () => { 
+
     const filterFields1 = [
         { name: 'Origen', type: 'text' },
         { name: 'Destino', type: 'text' },
         { name: 'Fecha', type: 'date' },
       ];
 
-    // Función para manejar la búsqueda
     const handleSearch = (filters) => {
         console.log('Filtros aplicados:', filters);
     };
-
 
     const { login, logout } = useAutenticacion();
 

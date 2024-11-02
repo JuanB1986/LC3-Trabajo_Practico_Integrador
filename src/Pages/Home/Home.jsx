@@ -1,8 +1,8 @@
 import styles from "./Home.module.css";
 import { Button } from "react-bootstrap";
 import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
-import Travel from "../../Components/Travel";
-import { useAutenticacion } from '../../Components/ContextoAutenticacion';
+import Travel from "../../Components/Travel/Travel.jsx";
+import { useAutenticacion } from '../../Components/Contexts/ContextoAutenticacion.jsx';
 import ListaPasajeros from "../../Components/getPassangerList.jsx";
 import TravelRegisterForm from '../../Components/Forms/Travel/TravelRegisterForm.jsx'
 
