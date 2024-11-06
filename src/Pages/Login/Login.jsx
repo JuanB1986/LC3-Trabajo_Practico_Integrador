@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "react-bootstrap";
-import { useAutenticacion } from '../../Components/Contexts/ContextoAutenticacion.jsx';
+import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
 import styles from './Login.module.css'
 
 const Login = () => {
@@ -54,7 +54,6 @@ const Login = () => {
         } else {
             setError('Usuario o contraseña incorrectos.');
         }
-
     };
 
     const handleHome = () =>{
@@ -64,8 +63,6 @@ const Login = () => {
     return (
         
         <div className={styles.Login_fondo}>   
-
-        
             <header className={styles.header}>
               <span className={styles.header_span}>TravelRos</span>
               <div>
@@ -81,8 +78,23 @@ const Login = () => {
                 <h3 id={styles.Login_titulo}>Login</h3>
                 <form onSubmit={handleSubmit}>
 
-                    <input type="text" className={styles.Login_input} placeholder='Usuario' value={usuario} onChange={(e) => setUsuario(e.target.value)} required />
-                    <input type="password" className={styles.Login_input} placeholder='Contraseña' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input 
+                    type="text" 
+                    className={styles.Login_input} 
+                    placeholder='Usuario' 
+                    value={usuario} 
+                    onChange={(e) => setUsuario(e.target.value)} 
+                    required 
+                    />
+
+                    <input 
+                    type="password" 
+                    className={styles.Login_input} 
+                    placeholder='Contraseña' 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    required 
+                    />
                     
                     <button id ={styles.Login_loginButton} type="submit">Iniciar sesión</button>
                     

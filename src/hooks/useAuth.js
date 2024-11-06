@@ -14,7 +14,7 @@ export const useAuth = () => {
 
     const login = (token, rol) => {
         localStorage.setItem("isAuthenticated", 'true');
-        setRole(rol);                                       //Aca esta OK el seteo
+        setRole(rol);                                       
         setIsAuthenticated(true);
         setToken(token);
     };
