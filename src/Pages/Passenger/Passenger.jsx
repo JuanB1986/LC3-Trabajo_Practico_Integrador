@@ -1,6 +1,4 @@
-import React from 'react'
 import styles from './Passenger.module.css'
-
 
 const Passenger = () => {
   return (

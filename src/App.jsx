@@ -1,11 +1,11 @@
-import { ProveedorAutenticacion } from './Components/Contexts/ContextoAutenticacion';
+import { AuthenticationProvider } from './Components/Contexts/AuthenticationContext';
 import AppRouter from './Routers/AppRouter';
 function App() {
 
   return (
-    <ProveedorAutenticacion>
+    <AuthenticationProvider>
         <AppRouter />
-    </ProveedorAutenticacion>
+    </AuthenticationProvider>
   )
 }
 

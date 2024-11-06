@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ListaPasajeros = () => {
   const [passengers, setPassengers] = useState([]);
@@ -22,7 +22,7 @@ const ListaPasajeros = () => {
         const listadoPasajeros = pasajeros
           .map((pasajero) => ({
             pasajeroReservations: pasajero.reservations,
-            pasajeroUserId: pasajero.userId, // Asegúrate de usar la propiedad correcta
+            pasajeroUserId: pasajero.userId, 
             pasajeroName: pasajero.name,
             pasajeroLastName: pasajero.lastName,
             pasajeroPhoneNumber: pasajero.phoneNumber,
@@ -30,7 +30,7 @@ const ListaPasajeros = () => {
             pasajeroEmail: pasajero.email,
             pasajeroPassword: pasajero.password,
           }))
-          .sort((a, b) => b.pasajeroUserId - a.pasajeroUserId); // Asegúrate de usar el campo correcto aquí
+          .sort((a, b) => b.pasajeroUserId - a.pasajeroUserId);
 
         setPassengers(listadoPasajeros);
       })
