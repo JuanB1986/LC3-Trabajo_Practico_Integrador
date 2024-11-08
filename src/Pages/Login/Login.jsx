@@ -60,6 +60,14 @@ const Login = () => {
         navigate("/")
     }
 
+    const handlesPassengerRegister = () => {
+        navigate("/passengerRegister");
+    };
+
+    const handleDriverRegister = () => {
+        navigate("/driverRegister");
+    };
+
     return (
         
         <div className={styles.Login_fondo}>   
@@ -75,7 +83,7 @@ const Login = () => {
             <h1 id={styles.subtitulo} >Login</h1>
 
             <div id={styles.Login_contenedor}>
-                <h3 id={styles.Login_titulo}>Login</h3>
+                <h5 id={styles.Login_titulo}>Iniciar sesión / Registrarse</h5>
                 <form onSubmit={handleSubmit}>
 
                     <input 
@@ -97,6 +105,10 @@ const Login = () => {
                     />
                     
                     <button id ={styles.Login_loginButton} type="submit">Iniciar sesión</button>
+                    <hr></hr>
+                    <p id ={styles.Login_tituloRegistro}>¿ No estás registrado ?</p>
+                    <button id ={styles.Login_registerButton} onClick={handlesPassengerRegister} type="button">Registrarse como Pasajero</button>
+                    <button id ={styles.Login_registerButton} onClick={handleDriverRegister} type="button">Registrarse como Conductor</button>
                     
                     {error && <p id={styles.Login_errorLabel}>{error}</p>}
 
