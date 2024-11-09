@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import Travel from "../../Components/Travel/Travel.jsx";
 import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
 import DriversTravels from "../../Components/getDriversTravels.jsx";
+import TravelCreateModifyForm from "../../Components/Forms/TravelCreateModifyForm/TravelCreateModifyForm.jsx";
+
 
 const travels = [
     {
@@ -64,7 +66,7 @@ const MyReservations = () => {
 
 
     return (
-        <>
+        <div>
             <header className={styles.header}>
               <span className={styles.header_span}>TravelRos</span>
               <div>
@@ -78,12 +80,24 @@ const MyReservations = () => {
 
             <div className={styles.contenedor2}>
                 <DriversTravels />
+                <TravelCreateModifyForm />
             </div>
+
             <footer className={styles.footer}>
 
             </footer>
-        </>
+        </div>
     )
 }
 
 export default MyReservations
+
+/*
+            <div className={styles.contenedor2}>
+                <DriversTravels />
+            </div>
+
+            <div>
+              <TravelCreateModifyForm></TravelCreateModifyForm>
+            </div>
+*/

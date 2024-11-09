@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
 import styles from './TravelItem.module.css';
+import { useAuth } from '../../hooks/useAuth';
 
 const TravelItem = ({ travelId, origin, destination, date, time, availableSeats, price, isLogged }) => {
 
+    //const { isAuthenticated, token, login, logout, role } = useAuth();
+    const { isAuthenticated,role } = useAuth();
 
     return (
         <div className={styles.contenedor}>
@@ -16,23 +19,12 @@ const TravelItem = ({ travelId, origin, destination, date, time, availableSeats,
 
             <div className={styles.right}>
                 <div>${price}</div>
-                {isLogged && (
+                {isAuthenticated  && (              //isLogged
                     <button className={styles.delete_button}>Reservar</button>
                 )}
             </div>
         </div>
     );
 }
-
-TravelItem.propTypes = {
-    travelId: PropTypes.number,
-    origin: PropTypes.string.isRequired,
-    destination: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-    availableSeats: PropTypes.number,
-    price: PropTypes.number.isRequired,
-    isLogged: PropTypes.bool.isRequired,
-};
 
 export default TravelItem;

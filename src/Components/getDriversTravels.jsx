@@ -25,15 +25,16 @@ const TravelList = ({ authenticated }) => {
         console.log("Datos recibidos desde la API:", driver);
 
         if (driver && driver.travels && Array.isArray(driver.travels)) {
+          
           const listadotravels = driver.travels.map((travel) => ({
-            travelId: travel.id,
-            origin: travel.startDirection,
-            destination: travel.endDirection,
-            date: travel.date,
-            time: travel.time,
-            availableSeats: 0, 
-            price: travel.price,
-            status: travel.status,
+              travelId: travel.id,
+              origin: travel.startDirection,
+              destination: travel.endDirection,
+              date: travel.date,
+              time: travel.time,
+              availableSeats: "-", 
+              price: travel.price,
+              status: travel.status,
           }));
 
           console.log("Lista de viajes:", listadotravels);
