@@ -39,7 +39,7 @@ const Home = () => {
         <span className={styles.header_span}>TravelRos</span>
         <div>
         {isAuthenticated ? (
-          <Button onClick={handlerReservas} variant="outline-success">
+          <Button onClick={handlerReservas} variant="outline-primary">
             Mis Reservas
           </Button>
         ) : null}

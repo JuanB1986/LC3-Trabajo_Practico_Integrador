@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Travel from "./Travel/Travel";
 import PropTypes from 'prop-types';
 
-const TravelList = ({ authenticated }) => {
+const ReservationList = ({ authenticated }) => {
   const [travels, setTravels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,14 +10,8 @@ const TravelList = ({ authenticated }) => {
   const fetchTravels = () => {
     
     const passengerId = localStorage.getItem('userId');
-
-    let url = "https://localhost:7080/api/Travel/available";
-
-    if (passengerId) {
-      url = `https://localhost:7080/api/Travel/available?passengerId=${passengerId}`;
-    }
-
-    fetch(url, {
+    
+    fetch(`https://localhost:7080/api/Passenger/${passengerId}/reserved-travels`, {
       method: "GET",
       mode: "cors",
       headers: {
@@ -59,13 +53,13 @@ const TravelList = ({ authenticated }) => {
     fetchTravels();
   }, []);
 
-  // Función para manejar la reserva
-  const handleReserve = async (travelId) => {
+  // Función para manejar la cancelación
+  const handleCancel = async (travelId) => {
     const passengerId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
 
     try {
-      const response = await fetch(`https://localhost:7080/api/Passenger/${passengerId}/reserve/${travelId}`, {
+      const response = await fetch(`https://localhost:7080/api/Passenger/${passengerId}/cancel-reservation/${travelId}`, {
         method: 'POST',
         headers: {
           accept: 'application/json',
@@ -92,13 +86,13 @@ const TravelList = ({ authenticated }) => {
 
   return (
     <div>
-      <Travel travels={travels} authenticated={authenticated} onReserve={handleReserve} />
+      <Travel travels={travels} authenticated={authenticated} onCancel={handleCancel} myReserve={true} />
     </div>
-  );
+  );  
 };
 
-TravelList.propTypes = {
-  authenticated: PropTypes.bool.isRequired,
+ReservationList.propTypes = {
+  authenticated: PropTypes.bool,
 };
 
-export default TravelList;
+export default ReservationList;

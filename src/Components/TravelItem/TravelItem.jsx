@@ -1,22 +1,27 @@
 import PropTypes from 'prop-types';
 import styles from './TravelItem.module.css';
-import { useAuth } from '../../hooks/useAuth';
 
-const TravelItem = ({ travelId, origin, destination, date, time, availableSeats, price, isLogged, onDelete, onReserve }) => {
+const TravelItem = ({ travelId, origin, destination, date, time, availableSeats, price, isLogged, onDelete, onReserve, onCancel, myReserve }) => {
 
     const role = localStorage.getItem('role');
 
     const handleReserve = () => {
         if (window.confirm("¿Está seguro de que desea reservar este viaje?")) {
-          onReserve(travelId); 
+            onReserve(travelId);
         }
-      };
+    };
 
     const handleDelete = () => {
         if (window.confirm("¿Está seguro de que desea eliminar este viaje?")) {
-          onDelete(travelId);
+            onDelete(travelId);
         }
-      };
+    };
+
+    const handleCancel = () => {
+        if (window.confirm("¿Está seguro de que desea cancelar este viaje?")) {
+            onCancel(travelId);
+        }
+    };
 
     return (
         <div className={styles.contenedor}>
@@ -33,6 +38,11 @@ const TravelItem = ({ travelId, origin, destination, date, time, availableSeats,
                 {isLogged && role === 'Passenger' && (
                     <button className={styles.delete_button} onClick={handleReserve}>Reservar</button>
                 )}
+
+                {myReserve && role === 'Passenger' && (
+                    <button className={styles.delete_button} onClick={handleCancel}>Cancelar</button>
+                )}
+
                 {isLogged && role === 'Driver' && (
                     <button className={styles.delete_button} onClick={handleDelete}>Eliminar</button>
                 )}
@@ -49,9 +59,11 @@ TravelItem.propTypes = {
     time: PropTypes.string.isRequired,
     availableSeats: PropTypes.number,
     price: PropTypes.number.isRequired,
-    isLogged: PropTypes.bool.isRequired,
+    isLogged: PropTypes.bool,
     onDelete: PropTypes.func,
     onReserve: PropTypes.func,
+    onCancel: PropTypes.func,
+    myReserve: PropTypes.bool,
 };
 
 export default TravelItem;
