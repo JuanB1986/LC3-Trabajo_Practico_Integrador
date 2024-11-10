@@ -36,4 +36,4 @@ const MyTravels = () => {
   )
 }
 
-export default MyTravels
+export default MyReservations

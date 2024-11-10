@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styles from "../Pages/MisViajes/Mytravels.module.css";
 import Travel from "./Travel/Travel.jsx";
 import TravelCreateModifyForm from "./Forms/TravelCreateModifyForm/TravelCreateModifyForm.jsx";
-
 import PropTypes from 'prop-types';
 
 const TravelList = ({ authenticated }) => {
@@ -76,7 +75,6 @@ const TravelList = ({ authenticated }) => {
     return <div>Error: {error}</div>;
   }
 
-
   return (
     <div className={styles.contenedor2}>
       {travels.length > 0 ? (
@@ -85,6 +83,7 @@ const TravelList = ({ authenticated }) => {
         <div>Aún no tiene ningún viaje registrado.</div>
       )}
       {showCreateForm && <TravelCreateModifyForm />}
+
     </div>
   );
 };

@@ -8,6 +8,10 @@ import PassengerregisterForm from '../Components/Forms/PassengerRegister/Passeng
 import DriverRegisterForm from '../Components/Forms/DriverRegister/DriverRegisterForm.jsx'
 
 
+import PassengerregisterForm from '../Components/Forms/PassengerRegister/PassengerRegisterForm.jsx'
+import DriverRegisterForm from '../Components/Forms/DriverRegister/DriverRegisterForm.jsx'
+
+
 const AppRouter = () => {
 
   return (

@@ -17,9 +17,8 @@ const TravelCreateModifyForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
     setDriverId(localStorage.getItem("userId"))      
-
+    
     const travelDataModify = {
       travelId: travelId,
       startDirection: startDirection,

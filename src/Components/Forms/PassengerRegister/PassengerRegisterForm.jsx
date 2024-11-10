@@ -49,6 +49,7 @@ const DriverRegisterForm = () => {
   };
 
   const handleHome = () => {
+
     navigate("/iniciar-sesion")
   }
 
@@ -80,7 +81,7 @@ const DriverRegisterForm = () => {
           </form>
         </div>
       </div>
-    </div>
+    </div>  
   )
 }
 

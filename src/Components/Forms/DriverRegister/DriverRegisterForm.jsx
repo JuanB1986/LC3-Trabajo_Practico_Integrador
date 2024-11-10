@@ -1,6 +1,7 @@
 import styles from './DriverRegisterForm.module.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Button } from "react-bootstrap";
 
 const DriverRegisterForm = () => {
@@ -94,7 +95,6 @@ const DriverRegisterForm = () => {
             <input type="text" className={styles.Form_input} onChange={(e) => setCapacity(e.target.value)} required placeholder='Cantidad de asientos' />
 
             <button className={styles.Form_loginButton} type="submit">Enviar</button>
-
           </form>
         </div>
       </div>

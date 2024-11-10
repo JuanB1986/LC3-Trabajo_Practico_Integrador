@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './TravelItem.module.css';
+import { useAuth } from '../../hooks/useAuth';
 
 const TravelItem = ({ travelId, origin, destination, date, time, availableSeats, price, isLogged, onDelete, onReserve }) => {
 
