@@ -6,46 +6,6 @@ import DriversTravels from "../../Components/getDriversTravels.jsx";
 import TravelCreateModifyForm from "../../Components/Forms/TravelCreateModifyForm/TravelCreateModifyForm.jsx";
 
 
-const travels = [
-    {
-      id: 1,
-      origen: "Buenos Aires",
-      destino: "Córdoba",
-      fecha: new Date(2024, 9, 15), 
-      hora: "14:30",
-      asientos: 3,
-      precio: 1500,
-    },
-    {
-      id: 2,
-      origen: "Rosario",
-      destino: "Santa Fe",
-      fecha: new Date(2024, 10, 20), 
-      hora: "09:00",
-      asientos: 5,
-      precio: 800,
-    },
-    {
-      id: 3, 
-      origen: "Mendoza",
-      destino: "San Juan",
-      fecha: new Date(2024, 11, 5), 
-      hora: "16:45",
-      asientos: 4,
-      precio: 1200,
-    },
-    {
-      id: 4,
-      origen: "La Plata",
-      destino: "Mar del Plata",
-      fecha: new Date(2024, 7, 22), 
-      hora: "07:30",
-      asientos: 2,
-      precio: 1700,
-    },
-  ];
- 
-
 const MyReservations = () => { 
 
     const filterFields1 = [
@@ -91,13 +51,3 @@ const MyReservations = () => {
 }
 
 export default MyReservations
-
-/*
-            <div className={styles.contenedor2}>
-                <DriversTravels />
-            </div>
-
-            <div>
-              <TravelCreateModifyForm></TravelCreateModifyForm>
-            </div>
-*/

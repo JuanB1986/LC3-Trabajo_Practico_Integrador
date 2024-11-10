@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import TravelItem from '../TravelItem/TravelItem';
 
-const Travel = ({ travels, authenticated  }) => {
+const Travel = ({ travels, authenticated,btnClick  }) => {
     return (
         <div>
             {travels.map((travel) => (
@@ -15,6 +15,7 @@ const Travel = ({ travels, authenticated  }) => {
                     availableSeats={travel.availableSeats}
                     price={travel.price}
                     isLogged={authenticated}
+                    btnClick={btnClick}
                 />
             ))}
         </div>
