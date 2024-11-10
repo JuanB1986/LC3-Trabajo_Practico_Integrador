@@ -1,30 +1,15 @@
 import styles from "./MyReservations.module.css";
 import { Button } from "react-bootstrap";
-import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
-import TravelList from "../../Components/getTravelList.jsx";
+import ReservationList from "../../Components/getPassengerReservations";
 import { useNavigate } from 'react-router-dom';
-import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
 
-const Home = () => {
-  const filterFields1 = [
-    { name: 'Origen', type: 'text' },
-    { name: 'Destino', type: 'text' },
-    { name: 'Fecha', type: 'date' },
-  ];
+const MyReservations = () => {
 
-  
-  const { isAuthenticated, role, logout } = useAutenticacion();
   const navigate = useNavigate();
 
   const handlerVolver = () => {
-      navigate('/pasajero');
+    navigate('/pasajero');
   };
-
-  // Función para manejar la búsqueda
-  const handleSearch = (filters) => {
-    console.log('Filtros aplicados:', filters);
-  };
-
 
   return (
     <div className={styles.dashboard}>
@@ -33,27 +18,19 @@ const Home = () => {
         <span className={styles.header_span}>TravelRos</span>
         <div>
 
-        <Button onClick={handlerVolver} variant="outline-success">
-          Volver
-        </Button>
+          <Button onClick={handlerVolver} variant="outline-success">
+            Volver
+          </Button>
 
         </div>
       </header>
 
       <main>
         <hr className={styles.linea} />
-
-        <div className={styles.filter}>
-          <h1>Buscá con quién compartir tu próximo viaje!</h1>
-          <h6>¡Elegí fecha, origen o destino y encontralo!</h6>
-
-          <DynamicFilter fields={filterFields1} onSearch={handleSearch} />
-        </div>
-
-        <hr className={styles.linea} />
-
         <div className={styles.contenedor2}>
-          <TravelList authenticated={isAuthenticated && role === 'Passenger'} />
+          <h1>Mis Reservas</h1>
+
+          <ReservationList />
         </div>
       </main>
 
@@ -64,4 +41,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default MyReservations
