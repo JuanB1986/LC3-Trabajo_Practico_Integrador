@@ -3,7 +3,6 @@ import { useAutenticacion } from './Contexts/AuthenticationContext';
 import PropTypes from 'prop-types';
 
 const PrivateRoutes = ({ element, requiredRole }) => {
-
     const { isAuthenticated, role } = useAutenticacion();
 
     if (isAuthenticated && role === requiredRole) {

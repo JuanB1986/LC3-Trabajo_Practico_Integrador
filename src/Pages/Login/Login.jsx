@@ -1,20 +1,17 @@
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "react-bootstrap";
 import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
-import styles from './Login.module.css'
+import styles from './Login.module.css';
 
 const Login = () => {
-
     const navigate = useNavigate();
-    const location = useLocation();
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const { login, logout } = useAutenticacion();
+    const { login } = useAutenticacion();
 
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (usuario === '' || password === '') {
@@ -22,86 +19,117 @@ const Login = () => {
             return;
         }
 
-        //Admin
-        if (usuario === 'admin' && password === '123') {
-            const fakeToken = '1234567890abcdef'; 
-            login(fakeToken, "admin");            
+        try {
+            const response = await fetch('https://localhost:7080/api/authentication/authenticate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: usuario, password: password }),
+            });
 
-            const from = location.state?.from?.pathname || '/admin';
-            navigate(from, { replace: true });
-        } else {
-            setError('Usuario o contraseña incorrectos.');
-        }
+            if (!response.ok) {
+                setError('Usuario o contraseña incorrectos.');
+                return;
+            }
 
-        //Conductor
-        if (usuario === 'conductor' && password === '123') {
-            const fakeToken = '1234567890abcdef'; 
-            login(fakeToken, "conductor");
+            // Obtenemos la respuesta como JSON para extraer el token, role e id
+            const authResponse = await response.json();
 
-            const from = location.state?.from?.pathname || '/conductor';
-            navigate(from, { replace: true });
-        } else {
-            setError('Usuario o contraseña incorrectos.');
-        }
+            // Llamamos a la función login del contexto, pasando los datos extraidos anteriormente
+            login(authResponse.token, authResponse.role, authResponse.id);
 
-        //Pasajero
-        if (usuario === 'pasajero' && password === '123') {
-            const fakeToken = '1234567890abcdef'; 
-            login(fakeToken, "pasajero");
+            const from = location.state?.from?.pathname;
+            if (from) {
+                navigate(from, { replace: true });
+            } else {
+                switch (authResponse.role) {
+                    case "Driver":
+                        navigate("/conductor", { replace: true });
+                        break;
+                    case "Passenger":
+                        navigate("/pasajero", { replace: true });
+                        break;
+                    case "Admin":
+                        navigate("/admin", { replace: true });
+                        break;
+                    default:
+                        navigate("/", { replace: true });
+                        break;
+                }
+            }
 
-            const from = location.state?.from?.pathname || '/pasajero';
-            navigate(from, { replace: true });
-        } else {
-            setError('Usuario o contraseña incorrectos.');
+        } catch (error) {
+            console.error('Error al autenticar:', error);
+            setError('Ocurrió un error. Inténtalo de nuevo.');
         }
     };
 
-    const handleHome = () =>{
-        navigate("/")
-    }
+    const handleHome = () => {
+        navigate("/");
+    };
+
+    const handlesPassengerRegister = () => {
+        navigate("/passengerRegister");
+    };
+
+    const handleDriverRegister = () => {
+        navigate("/driverRegister");
+    };
 
     return (
-        
-        <div className={styles.Login_fondo}>   
+        <div className={styles.Login_fondo}>
             <header className={styles.header}>
-              <span className={styles.header_span}>TravelRos</span>
-              <div>
-                  <Button onClick={handleHome} variant="outline-success">HOME</Button>
-              </div>
+                <span className={styles.header_span}>TravelRos</span>
+                <div>
+                    <Button onClick={handleHome} variant="outline-success">HOME</Button>
+                </div>
             </header>
 
             <hr className={styles.linea} />
 
-            <h1 id={styles.subtitulo} >Login</h1>
+            <h1 className={styles.subtitulo}>Login</h1>
 
-            <div id={styles.Login_contenedor}>
-                <h3 id={styles.Login_titulo}>Login</h3>
+            <div className={styles.Login_contenedor}>
+                <h5 className={styles.Login_titulo}>Iniciar sesión / Registrarse</h5>
                 <form onSubmit={handleSubmit}>
-
-                    <input 
-                    type="text" 
-                    className={styles.Login_input} 
-                    placeholder='Usuario' 
-                    value={usuario} 
-                    onChange={(e) => setUsuario(e.target.value)} 
-                    required 
+                    <input
+                        type="text"
+                        className={styles.Login_input}
+                        placeholder='Usuario'
+                        value={usuario}
+                        onChange={(e) => setUsuario(e.target.value)}
+                        required
                     />
 
-                    <input 
-                    type="password" 
-                    className={styles.Login_input} 
-                    placeholder='Contraseña' 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required 
+                    <input
+                        type="password"
+                        className={styles.Login_input}
+                        placeholder='Contraseña'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
-                    
-                    <button id ={styles.Login_loginButton} type="submit">Iniciar sesión</button>
-                    
-                    {error && <p id={styles.Login_errorLabel}>{error}</p>}
 
+                    <button className={styles.Login_loginButton} type="submit">Iniciar sesión</button>
+                    <hr></hr>
+                    <p className={styles.Login_tituloRegistro}>¿ No estás registrado ?</p>
+
+                    <button
+                        className={styles.Login_registerButton}
+                        onClick={handlesPassengerRegister}
+                        type="button">Registrarse como Pasajero
+                    </button>
+
+                    <button
+                        className={styles.Login_registerButton}
+                        onClick={handleDriverRegister}
+                        type="button">Registrarse como Conductor
+                    </button>
+
+                    {error && <p className={styles.Login_errorLabel}>{error}</p>}
                 </form>
-            </div>    
+            </div>
         </div>
     );
 };

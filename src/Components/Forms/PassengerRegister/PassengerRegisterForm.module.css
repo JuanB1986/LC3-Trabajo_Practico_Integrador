@@ -1,13 +1,45 @@
+.linea {
+    width: 93%;
+    margin: 0 auto;
+    border: 1px solid black;
 
-#Form_contenedor{
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 60px;
+
+}
+.header_span{
+    font-size: 27px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #426B1F;
+}
+
+.footer {
+    background-color: #f2f2f2;
+    height: 50px;
+}
+
+.subtitulo{
+    text-align: center;
+    font-family:serif;
+}
+
+
+.Form_contenedor{
     background-color: rgb(155, 168, 112);
     border-radius: 10px;
     border: 0px;
     width: 350px;
     height: auto;
-    margin-left: 40%;
-    margin-top: 5%;
     box-shadow: 1px 3px 7px rgb(85, 91, 86);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .Form_input{
@@ -15,7 +47,8 @@
     height: 30px;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 5%;
+    margin-bottom: 0%;
+    margin-top: 5%;
     border: 0px;
     border-radius: 15px;
     background-color: rgb(255, 255, 255);
@@ -29,18 +62,18 @@
     text-align: center;
 }
 
-#Form_titulo{
+.Form_titulo{
     text-align: center;
     color: rgb(82, 112, 93);
     font-weight: 700;
 }
 
-#Form_loginButton{
+.Form_loginButton{
     width: 40%;
     margin-left: 30%;
-    margin-top: 0%;
+    margin-top: 5%;
     margin-bottom: 5%;
-    height: 30px;
+    height: 40px;
     border-radius: 5px;
     font-size: medium;
     background-color: rgb(45, 107, 41);

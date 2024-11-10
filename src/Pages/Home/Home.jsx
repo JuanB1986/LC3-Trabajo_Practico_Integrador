@@ -12,7 +12,7 @@ const Home = () => {
     { name: 'Fecha', type: 'date' },
   ];
 
-  const { isAuthenticated, role, login, logout } = useAutenticacion();
+  const { isAuthenticated, role, logout } = useAutenticacion();
   const navigate = useNavigate();
 
   const handleInicio = () => {
@@ -42,15 +42,18 @@ const Home = () => {
 
       <main>
         <hr className={styles.linea} />
-        
+
         <div className={styles.filter}>
+          <h1>Buscá con quién compartir tu próximo viaje!</h1>
+          <h6>¡Elegí fecha, origen o destino y encontralo!</h6>
+
           <DynamicFilter fields={filterFields1} onSearch={handleSearch} />
         </div>
 
         <hr className={styles.linea} />
 
         <div className={styles.contenedor2}>
-          <TravelList authenticated={isAuthenticated && role === 'pasajero'} />
+          <TravelList authenticated={isAuthenticated && role === 'Passenger'} />
         </div>
       </main>
 

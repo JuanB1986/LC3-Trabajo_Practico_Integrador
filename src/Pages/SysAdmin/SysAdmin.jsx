@@ -1,14 +1,20 @@
 import styles from './SysAdmin.module.css'
 import { Button } from "react-bootstrap";
 import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
+import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
+import UserList from '../../Components/getUserList.jsx';
 
 const SysAdmin = () => {
+
+  const filterFields1 = [
+    { name: 'Nombre', type: 'text' },
+    { name: 'Apellido', type: 'text' },
+  ];
 
   const handleSearch = (filters) => {
     console.log('Filtros aplicados:', filters);
   };
-
-  const { login, logout } = useAutenticacion();
+  const { logout } = useAutenticacion();
 
   const handleInicio = () => {
     logout();
@@ -24,11 +30,15 @@ const SysAdmin = () => {
       </header>
       <main>
         <hr className={styles.linea} />
+        <div className={styles.filter}>
+          <h1>Lista de Usuarios Activos</h1>
 
-        <h1 id={styles.subtitulo} >Administrador</h1>
+          <DynamicFilter fields={filterFields1} onSearch={handleSearch} />
+        </div>
+        <hr className={styles.linea} />
 
         <div className={styles.contenedor2}>
-
+          <UserList/>
         </div>
 
       </main>

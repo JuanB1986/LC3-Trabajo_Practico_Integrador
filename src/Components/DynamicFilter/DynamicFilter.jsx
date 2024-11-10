@@ -23,9 +23,6 @@ const DynamicFilter = ({ fields, onSearch }) => {
 
   return (
     <>
-      <h1>Buscá con quién compartir tu próximo viaje!</h1>
-      <h6>¡Elegí fecha, origen o destino y encontralo!</h6>
-
       <div className={styles.filter_container}>
         {fields.map(({ name, type }) => (
           <div key={name} className={styles.field_container}>

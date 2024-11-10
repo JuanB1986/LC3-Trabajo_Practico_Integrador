@@ -3,6 +3,17 @@ import styles from './TravelItem.module.css';
 
 const TravelItem = ({ travelId, origin, destination, date, time, availableSeats, price, isLogged }) => {
 
+    const role = localStorage.getItem('role');
+
+    const handleReserve = () => {
+
+        console.log(`Reservando viaje con ID: ${travelId}`);
+    };
+
+    const handleDelete = () => {
+
+        console.log(`Eliminando viaje con ID: ${travelId}`);
+    };
 
     return (
         <div className={styles.contenedor}>
@@ -16,8 +27,11 @@ const TravelItem = ({ travelId, origin, destination, date, time, availableSeats,
 
             <div className={styles.right}>
                 <div>${price}</div>
-                {isLogged && (
-                    <button className={styles.delete_button}>Reservar</button>
+                {isLogged && role === 'Passenger' && (
+                    <button className={styles.delete_button} onClick={handleReserve}>Reservar</button>
+                )}
+                {isLogged && role === 'Driver' && (
+                    <button className={styles.delete_button} onClick={handleDelete}>Eliminar</button>
                 )}
             </div>
         </div>
