@@ -6,6 +6,7 @@ import MyTravels from '../Pages/MisViajes/MyTravels';
 import SysAdmin from '../Pages/SysAdmin/SysAdmin'
 import PassengerregisterForm from '../Components/Forms/PassengerRegister/PassengerRegisterForm.jsx'
 import DriverRegisterForm from '../Components/Forms/DriverRegister/DriverRegisterForm.jsx'
+import MyReservations from '../Pages/MisReservas/MyReservations.jsx'
 
 const AppRouter = () => {
 
@@ -18,6 +19,7 @@ const AppRouter = () => {
         <Route path="/passengerRegister" element={<PassengerregisterForm />} />
         <Route path="/conductor" element={<PrivateRoutes element={<MyTravels />} requiredRole="Driver" />} />
         <Route path="/pasajero" element={<PrivateRoutes element={<Home />} requiredRole="Passenger" />} />
+        <Route path="/mis-reservas" element={<MyReservations />} />
         <Route path="/admin" element={<PrivateRoutes element={<SysAdmin />} requiredRole="Admin" />} />
       </Routes>
     </Router>

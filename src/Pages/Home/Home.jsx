@@ -28,12 +28,22 @@ const Home = () => {
     console.log('Filtros aplicados:', filters);
   };
 
+  const handlerReservas= () => {
+    navigate('/mis-reservas');
+};
+
   return (
     <div className={styles.dashboard}>
 
       <header className={styles.header}>
         <span className={styles.header_span}>TravelRos</span>
         <div>
+        {isAuthenticated ? (
+          <Button onClick={handlerReservas} variant="outline-success">
+            Mis Reservas
+          </Button>
+        ) : null}
+
           <Button onClick={handleInicio} variant="outline-success">
             {isAuthenticated ? 'Cerrar Sesión' : 'Iniciar Sesión'}
           </Button>

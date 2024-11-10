@@ -4,7 +4,6 @@ import { useState } from 'react';
 const TravelCreateModifyForm = () => {
 
   const [travelId, setTravelId] = useState('');
-  const [driverId, setDriverId] = useState('');
   const [startDirection, setStartDirection] = useState('');
   const [endDirection, setEndDirection] = useState('');
   const [startTime, setTime] = useState('');
@@ -13,12 +12,14 @@ const TravelCreateModifyForm = () => {
   const [inputIdType, setInputIdType]=useState("hidden")
   const [message, setMessage] = useState("");
 
-  const route = "https://localhost:7080/api/Travel";
+  const route = "https://localhost:7080/api/Travel";  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setDriverId(localStorage.getItem("userId"))      
-    
+
+    const driverId = localStorage.getItem("userId");
+    const token = localStorage.getItem('token');
+
     const travelDataModify = {
       travelId: travelId,
       startDirection: startDirection,
@@ -36,11 +37,12 @@ const TravelCreateModifyForm = () => {
     };
 
     try {
-      console.log(travelDataModify)
+
       const response = await fetch(option == false ? route : route+"/"+travelId, 
       {
         method: option == false ? 'POST' : 'PUT',
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(option == false ? travelDataCreate : travelDataModify),
