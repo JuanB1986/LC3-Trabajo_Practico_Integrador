@@ -1,19 +1,21 @@
 import PropTypes from 'prop-types';
 import styles from './TravelItem.module.css';
 
-const TravelItem = ({ travelId, origin, destination, date, time, availableSeats, price, isLogged }) => {
+const TravelItem = ({ travelId, origin, destination, date, time, availableSeats, price, isLogged, onDelete, onReserve }) => {
 
     const role = localStorage.getItem('role');
 
     const handleReserve = () => {
-
-        console.log(`Reservando viaje con ID: ${travelId}`);
-    };
+        if (window.confirm("¿Está seguro de que desea reservar este viaje?")) {
+          onReserve(travelId); 
+        }
+      };
 
     const handleDelete = () => {
-
-        console.log(`Eliminando viaje con ID: ${travelId}`);
-    };
+        if (window.confirm("¿Está seguro de que desea eliminar este viaje?")) {
+          onDelete(travelId);
+        }
+      };
 
     return (
         <div className={styles.contenedor}>
@@ -47,6 +49,8 @@ TravelItem.propTypes = {
     availableSeats: PropTypes.number,
     price: PropTypes.number.isRequired,
     isLogged: PropTypes.bool.isRequired,
+    onDelete: PropTypes.func,
+    onReserve: PropTypes.func,
 };
 
 export default TravelItem;

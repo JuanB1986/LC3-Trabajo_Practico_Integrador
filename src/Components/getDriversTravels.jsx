@@ -10,6 +10,22 @@ const TravelList = ({ authenticated }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null)
 
+  const handleDeleteTravel = async (travelId) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch(`https://localhost:7080/api/Travel/${travelId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }); 
+      if (!response.ok) throw new Error('No se pudo eliminar el viaje');
+      setTravels((prevTravels) => prevTravels.filter((travel) => travel.travelId !== travelId));
+    } catch (error) {
+      console.error("Error eliminando el viaje:", error);
+    }
+  };
+
   useEffect(() => {
     const driverId = localStorage.getItem("userId");
 
@@ -50,19 +66,25 @@ const TravelList = ({ authenticated }) => {
       });
   }, []);
 
+  const showCreateForm = travels.length != 0;
+
   if (loading) {
     return <div>Cargando lista de viajes...</div>;
   }
 
   if (error) {
-    return <div>Aún no tiene ningún viaje registrado.</div>;
+    return <div>Error: {error}</div>;
   }
 
 
   return (
     <div className={styles.contenedor2}>
-      <Travel travels={travels} authenticated={authenticated} />
-      <TravelCreateModifyForm />
+      {travels.length > 0 ? (
+        <Travel travels={travels} authenticated={authenticated} onDelete={handleDeleteTravel} />
+      ) : (
+        <div>Aún no tiene ningún viaje registrado.</div>
+      )}
+      {showCreateForm && <TravelCreateModifyForm />}
     </div>
   );
 };

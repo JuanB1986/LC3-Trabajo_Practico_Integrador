@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import TravelItem from '../TravelItem/TravelItem';
 
-const Travel = ({ travels, authenticated  }) => {
+const Travel = ({ travels, authenticated, onDelete, onReserve  }) => {
     return (
         <div>
             {travels.map((travel) => (
@@ -15,6 +15,8 @@ const Travel = ({ travels, authenticated  }) => {
                     availableSeats={travel.availableSeats}
                     price={travel.price}
                     isLogged={authenticated}
+                    onDelete={onDelete}
+                    onReserve={onReserve}
                 />
             ))}
         </div>
@@ -24,6 +26,8 @@ const Travel = ({ travels, authenticated  }) => {
 Travel.propTypes = {
     travels: PropTypes.array.isRequired,
     authenticated: PropTypes.bool.isRequired,
+    onDelete: PropTypes.func,
+    onReserve: PropTypes.func,
 }
 
 export default Travel
