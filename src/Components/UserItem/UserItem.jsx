@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from "react-bootstrap";
 import styles from './UserItem.module.css';
 
-const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => {
+const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role, onUserUpdate }) => {
   const [userData, setUserData] = useState({ name, lastName, dni, phoneNumber, email });
   const [isEditing, setIsEditing] = useState(false);
 
@@ -18,12 +19,17 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
     setIsEditing(true);
   };
 
-  const handlerEliminar = async(e) => {
-    const token = localStorage.getItem('token');
-    e.preventDefault();
+  const handlerEliminar = async (e) => {
 
-    const endpoint = role === 'Driver' 
-      ? `https://localhost:7080/api/Driver/${userId}` 
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este usuario?");
+    if (!confirmDelete) {
+      return;
+    }
+
+    const endpoint = role === 'Driver'
+      ? `https://localhost:7080/api/Driver/${userId}`
       : `https://localhost:7080/api/Passenger/${userId}`;
 
     try {
@@ -38,6 +44,7 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
 
       if (response.ok) {
         console.log("Eliminado con exito.")
+        onUserUpdate();
       } else {
         console.error('Failed to update user');
       }
@@ -45,19 +52,19 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
       console.error('Error:', error);
     }
   };
-  
+
 
   const handleCancel = () => {
     setIsEditing(false);
     setUserData({ name, lastName, dni, phoneNumber, email });
   };
-  
+
 
   const handleSubmit = async (e) => {
     const token = localStorage.getItem('token');
     e.preventDefault();
-    const endpoint = role === 'Driver' 
-      ? `https://localhost:7080/api/Driver/${userId}` 
+    const endpoint = role === 'Driver'
+      ? `https://localhost:7080/api/Driver/${userId}`
       : `https://localhost:7080/api/Passenger/${userId}`;
 
     try {
@@ -72,6 +79,7 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
 
       if (response.ok) {
         setIsEditing(false);
+        onUserUpdate();
       } else {
         console.error('Failed to update user');
       }
@@ -122,8 +130,8 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
             />
           </div>
           <div className={styles.rightAlignedButtons}>
-            <button type="submit" className={styles.save_button}>Guardar</button>
-            <button type="button" onClick={handleCancel} className={styles.cancel_button}>Cancelar</button>
+            <Button variant="success" type="submit">Guardar</Button>
+            <Button variant="secondary" type="button" onClick={handleCancel}>Cancelar</Button>
           </div>
         </form>
       ) : (
@@ -136,9 +144,9 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
             <span className={styles.secundario}> Nº de Usuario: {userId} </span>
           </div>
           <div className={styles.right}>
-            <button onClick={handleEdit} className={styles.modify_button}>Modificar</button>
+            <Button variant="success" onClick={handleEdit}>Modificar</Button>
             {!isEditing && (
-              <button onClick={handlerEliminar}  className={styles.delete_button}>Eliminar</button>
+              <Button variant="danger" onClick={handlerEliminar}>Eliminar</Button>
             )}
           </div>
         </>
@@ -155,6 +163,7 @@ UserItem.propTypes = {
   phoneNumber: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,
+  onUserUpdate: PropTypes.func.isRequired,
 };
 
 export default UserItem;

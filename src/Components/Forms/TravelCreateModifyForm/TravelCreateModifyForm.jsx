@@ -57,7 +57,7 @@ const TravelCreateModifyForm = () => {
       console.log('Datos enviados:', data);
       messageHandler("Modificado / Creado correctamente")
 
-    } catch (error) {      
+    } catch{      
       messageHandler("Error al enviar los datos")
     }
   };

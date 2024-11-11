@@ -24,7 +24,7 @@ const MyTravels = () => {
 
         <h1 className={styles.subtitulo} >Mis Viajes</h1>
 
-        <div>
+        <div className={styles.contenedor2}>
           <DriversTravels authenticated={isAuthenticated && role === 'Driver'} />
         </div>
       </main>

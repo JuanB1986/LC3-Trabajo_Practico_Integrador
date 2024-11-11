@@ -28,7 +28,7 @@ const SysAdmin = () => {
       <header className={styles.header}>
         <span className={styles.header_span}>TravelRos</span>
         <div>
-          <Button onClick={()=>{navigate("/driverRegister")}} variant="outline-success">Resitrar Conductor</Button>
+          <Button onClick={()=>{navigate("/driverRegister")}} variant="outline-primary">Registrar Conductor</Button>
           <Button onClick={handleInicio} variant="outline-success">Cerrar Sesión</Button>
         </div>
       </header>
