@@ -4,6 +4,7 @@ import { useAutenticacion } from '../../Components/Contexts/AuthenticationContex
 import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
 import UserList from '../../Components/getUserList.jsx';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../Components/Footer/Footer.jsx';
 
 const SysAdmin = () => {
 
@@ -23,12 +24,16 @@ const SysAdmin = () => {
     logout();
   }
 
+  const handleRegisterDriver = () => {
+    navigate("/driverRegister");
+  }
+
   return (
     <div className={styles.dashboard}>
       <header className={styles.header}>
         <span className={styles.header_span}>TravelRos</span>
         <div>
-          <Button onClick={()=>{navigate("/driverRegister")}} variant="outline-primary">Registrar Conductor</Button>
+          <Button onClick={handleRegisterDriver} variant="outline-primary">Registrar Conductor</Button>
           <Button onClick={handleInicio} variant="outline-success">Cerrar Sesión</Button>
         </div>
       </header>
@@ -42,12 +47,12 @@ const SysAdmin = () => {
         <hr className={styles.linea} />
 
         <div className={styles.contenedor2}>
-          <UserList/>
+          <UserList />
         </div>
 
       </main>
-      <footer className={styles.footer}>
-
+      <footer>
+        <Footer />
       </footer>
     </div>
   )

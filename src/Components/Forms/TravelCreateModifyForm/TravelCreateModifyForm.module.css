@@ -1,5 +1,5 @@
 
-#Form_contenedor{
+.Form_contenedor{
     background-color: rgb(155, 168, 112);
     border-radius: 10px;
     border: 0px;
@@ -45,13 +45,13 @@
     text-align: center;
 }
 
-#Form_titulo{
+.Form_titulo{
     text-align: center;
     color: rgb(82, 112, 93);
     font-weight: 700;
 }
 
-#Form_loginButton{
+.Form_loginButton{
     width: 60%;
     margin-left: 20%;
     margin-right: 20%;

@@ -2,6 +2,7 @@ import styles from "./Mytravels.module.css";
 import { Button } from "react-bootstrap";
 import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
 import DriversTravels from "../../Components/getDriversTravels.jsx";
+import Footer from "../../Components/Footer/Footer.jsx";
 
 const MyTravels = () => {
   const { isAuthenticated, role, logout } = useAutenticacion();
@@ -29,8 +30,8 @@ const MyTravels = () => {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-
+      <footer>
+        <Footer />
       </footer>
     </div>
   )
