@@ -1,6 +1,7 @@
 import styles from "./MyReservations.module.css";
-import { Button } from "react-bootstrap";
 import ReservationList from "../../Components/getPassengerReservations";
+import Footer from "../../Components/Footer/Footer";
+import { Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 
 const MyReservations = () => {
@@ -34,8 +35,8 @@ const MyReservations = () => {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-
+      <footer>
+        <Footer />
       </footer>
     </div>
   )

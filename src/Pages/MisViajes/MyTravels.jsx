@@ -2,6 +2,7 @@ import styles from "./Mytravels.module.css";
 import { Button } from "react-bootstrap";
 import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
 import DriversTravels from "../../Components/getDriversTravels.jsx";
+import Footer from "../../Components/Footer/Footer.jsx";
 
 const MyTravels = () => {
   const { isAuthenticated, role, logout } = useAutenticacion();
@@ -24,13 +25,13 @@ const MyTravels = () => {
 
         <h1 className={styles.subtitulo} >Mis Viajes</h1>
 
-        <div>
+        <div className={styles.contenedor2}>
           <DriversTravels authenticated={isAuthenticated && role === 'Driver'} />
         </div>
       </main>
 
-      <footer className={styles.footer}>
-
+      <footer>
+        <Footer />
       </footer>
     </div>
   )

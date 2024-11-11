@@ -6,7 +6,7 @@ const UserList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null)
 
-  useEffect(() => {
+  const fetchUsers = () => {
     const token = localStorage.getItem('token');
 
     fetch("https://localhost:7080/api/Admin/all-users", {
@@ -44,20 +44,24 @@ const UserList = () => {
         setError(error.message);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
-  if (loading) {
-    return <div>Cargando lista de viajes...</div>;
-  }
+  const handleUserUpdate = () => {
+    fetchUsers(); // Actualiza la lista sin recargar la página
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (loading) {return <div>Cargando lista de viajes...</div>;}
+
+  if (error) {return <div>Error: {error}</div>;}
 
   return (
-    <div>
-      <User users={users}/>
-    </div>
+    <>
+    <User users={users} onUserUpdate={handleUserUpdate}/>
+    </>
   );
 };
 

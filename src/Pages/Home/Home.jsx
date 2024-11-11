@@ -1,7 +1,8 @@
 import styles from "./Home.module.css";
-import { Button } from "react-bootstrap";
 import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
 import TravelList from "../../Components/getTravelList.jsx";
+import Footer from "../../Components/Footer/Footer.jsx";
+import { Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
 
@@ -28,9 +29,9 @@ const Home = () => {
     console.log('Filtros aplicados:', filters);
   };
 
-  const handlerReservas= () => {
+  const handlerReservas = () => {
     navigate('/mis-reservas');
-};
+  };
 
   return (
     <div className={styles.dashboard}>
@@ -38,11 +39,11 @@ const Home = () => {
       <header className={styles.header}>
         <span className={styles.header_span}>TravelRos</span>
         <div>
-        {isAuthenticated ? (
-          <Button onClick={handlerReservas} variant="outline-primary">
-            Mis Reservas
-          </Button>
-        ) : null}
+          {isAuthenticated ? (
+            <Button onClick={handlerReservas} variant="outline-primary">
+              Mis Reservas
+            </Button>
+          ) : null}
 
           <Button onClick={handleInicio} variant="outline-success">
             {isAuthenticated ? 'Cerrar Sesión' : 'Iniciar Sesión'}
@@ -67,8 +68,8 @@ const Home = () => {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-
+      <footer>
+        <Footer />
       </footer>
     </div>
   )

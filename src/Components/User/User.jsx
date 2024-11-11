@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import UserItem from '../UserItem/UserItem';
 
-const User = ({ users }) => {
+const User = ({ users, onUserUpdate  }) => {
     return (
         <div>
             {users.map((user) => (
@@ -14,6 +14,7 @@ const User = ({ users }) => {
                     phoneNumber={user.phoneNumber}
                     email={user.email}
                     role={user.role}
+                    onUserUpdate={onUserUpdate}
                 />
             ))}
         </div>
@@ -22,6 +23,7 @@ const User = ({ users }) => {
 
 User.propTypes = {
     users: PropTypes.array.isRequired,
+    onUserUpdate: PropTypes.func.isRequired,
 }
 
 export default User

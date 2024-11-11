@@ -17,7 +17,7 @@ const TravelList = ({ authenticated }) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }); 
+      });
       if (!response.ok) throw new Error('No se pudo eliminar el viaje');
       setTravels((prevTravels) => prevTravels.filter((travel) => travel.travelId !== travelId));
     } catch (error) {
@@ -65,8 +65,6 @@ const TravelList = ({ authenticated }) => {
       });
   }, []);
 
-  const showCreateForm = travels.length != 0;
-
   if (loading) {
     return <div>Cargando lista de viajes...</div>;
   }
@@ -82,7 +80,7 @@ const TravelList = ({ authenticated }) => {
       ) : (
         <div>Aún no tiene ningún viaje registrado.</div>
       )}
-      {showCreateForm && <TravelCreateModifyForm />}
+      <TravelCreateModifyForm />
 
     </div>
   );
