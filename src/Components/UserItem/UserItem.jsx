@@ -18,12 +18,43 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
     setIsEditing(true);
   };
 
+  const handlerEliminar = async(e) => {
+    const token = localStorage.getItem('token');
+    e.preventDefault();
+
+    const endpoint = role === 'Driver' 
+      ? `https://localhost:7080/api/Driver/${userId}` 
+      : `https://localhost:7080/api/Passenger/${userId}`;
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        console.log("Eliminado con exito.")
+      } else {
+        console.error('Failed to update user');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+
   const handleCancel = () => {
     setIsEditing(false);
     setUserData({ name, lastName, dni, phoneNumber, email });
   };
+  
 
   const handleSubmit = async (e) => {
+    const token = localStorage.getItem('token');
     e.preventDefault();
     const endpoint = role === 'Driver' 
       ? `https://localhost:7080/api/Driver/${userId}` 
@@ -33,6 +64,7 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
       const response = await fetch(endpoint, {
         method: 'PUT',
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
@@ -106,7 +138,7 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role }) => 
           <div className={styles.right}>
             <button onClick={handleEdit} className={styles.modify_button}>Modificar</button>
             {!isEditing && (
-              <button className={styles.delete_button}>Eliminar</button>
+              <button onClick={handlerEliminar}  className={styles.delete_button}>Eliminar</button>
             )}
           </div>
         </>

@@ -62,7 +62,14 @@ const DriverRegisterForm = () => {
   };
 
   const handleHome = () => {
-    navigate("/iniciar-sesion")
+    const rol = localStorage.getItem("role")
+    if (rol=="Admin")
+    {
+        navigate("/admin")
+    }
+    else{
+      navigate("/iniciar-sesion")
+    }
   }
 
   return (

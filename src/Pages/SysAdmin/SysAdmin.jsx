@@ -3,8 +3,11 @@ import { Button } from "react-bootstrap";
 import { useAutenticacion } from '../../Components/Contexts/AuthenticationContext.jsx';
 import DynamicFilter from "../../Components/DynamicFilter/DynamicFilter.jsx"
 import UserList from '../../Components/getUserList.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const SysAdmin = () => {
+
+  const navigate = useNavigate();
 
   const filterFields1 = [
     { name: 'Nombre', type: 'text' },
@@ -25,6 +28,7 @@ const SysAdmin = () => {
       <header className={styles.header}>
         <span className={styles.header_span}>TravelRos</span>
         <div>
+          <Button onClick={()=>{navigate("/driverRegister")}} variant="outline-success">Resitrar Conductor</Button>
           <Button onClick={handleInicio} variant="outline-success">Cerrar Sesión</Button>
         </div>
       </header>

@@ -7,10 +7,13 @@ const UserList = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+
     fetch("https://localhost:7080/api/Admin/all-users", {
       method: "GET",
       mode: "cors",
       headers: {
+        Authorization: `Bearer ${token}`,
         accept: "application/json",
       },
     })

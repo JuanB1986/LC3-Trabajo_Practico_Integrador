@@ -8,13 +8,14 @@ const ReservationList = ({ authenticated }) => {
   const [error, setError] = useState(null);
 
   const fetchTravels = () => {
-    
+    const token = localStorage.getItem('token');
     const passengerId = localStorage.getItem('userId');
     
     fetch(`https://localhost:7080/api/Passenger/${passengerId}/reserved-travels`, {
       method: "GET",
       mode: "cors",
       headers: {
+        Authorization: `Bearer ${token}`,
         accept: "application/json",
       },
     })
