@@ -11,6 +11,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const { login } = useAutenticacion();
 
+    // Maneja el envío del formulario de inicio de sesión
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -20,6 +21,7 @@ const Login = () => {
         }
 
         try {
+            // Realiza la solicitud de autenticación al servidor
             const response = await fetch('https://localhost:7080/api/authentication/authenticate', {
                 method: 'POST',
                 headers: {
@@ -33,12 +35,13 @@ const Login = () => {
                 return;
             }
 
-            // Obtenemos la respuesta como JSON para extraer el token, role e id
+            // Extrae el token, rol e id de la respuesta
             const authResponse = await response.json();
 
-            // Llamamos a la función login del contexto, pasando los datos extraidos anteriormente
+            // Llama a la función login del contexto, pasando los datos de autenticación
             login(authResponse.token, authResponse.role, authResponse.id);
 
+            // Redirige según el rol del usuario o a la página solicitada
             const from = location.state?.from?.pathname;
             if (from) {
                 navigate(from, { replace: true });
@@ -65,10 +68,12 @@ const Login = () => {
         }
     };
 
+    // Redirige a la página de inicio
     const handleHome = () => {
         navigate("/");
     };
 
+    // Redirige a la página de registro de conductores
     const handlesPassengerRegister = () => {
         navigate("/passengerRegister");
     };
@@ -79,6 +84,7 @@ const Login = () => {
 
     return (
         <div className={styles.Login_fondo}>
+            {/* ENCABEZADO */}
             <header className={styles.header}>
                 <span className={styles.header_span}>TravelRos</span>
                 <div>
@@ -87,6 +93,8 @@ const Login = () => {
             </header>
 
             <hr className={styles.linea} />
+
+            {/* FORMULARIO INICIO DE SESIÓN */}
 
             <h1 className={styles.subtitulo}>Login</h1>
 

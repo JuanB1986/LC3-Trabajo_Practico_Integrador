@@ -7,6 +7,7 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role, onUse
   const [userData, setUserData] = useState({ name, lastName, dni, phoneNumber, email });
   const [isEditing, setIsEditing] = useState(false);
 
+  // Maneja el cambio de los valores de los campos de texto
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -15,10 +16,12 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role, onUse
     }));
   };
 
+  // Habilita el modo de edición
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+  // Función para eliminar un usuario, realiza una petición DELETE a la API
   const handlerEliminar = async (e) => {
 
     e.preventDefault();
@@ -44,25 +47,27 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role, onUse
 
       if (response.ok) {
         console.log("Eliminado con exito.")
-        onUserUpdate();
+
+        onUserUpdate(); // Actualiza la lista de usuarios después de eliminar
       } else {
         console.error('Failed to update user');
       }
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+  }
 
-
+    // Cancela la edición, restaurando los datos originales del usuario
   const handleCancel = () => {
     setIsEditing(false);
     setUserData({ name, lastName, dni, phoneNumber, email });
   };
 
-
+    // Envia la actualización de datos del usuario 
   const handleSubmit = async (e) => {
     const token = localStorage.getItem('token');
     e.preventDefault();
+
     const endpoint = role === 'Driver'
       ? `https://localhost:7080/api/Driver/${userId}`
       : `https://localhost:7080/api/Passenger/${userId}`;
@@ -78,8 +83,8 @@ const UserItem = ({ userId, name, lastName, dni, phoneNumber, email, role, onUse
       });
 
       if (response.ok) {
-        setIsEditing(false);
-        onUserUpdate();
+        setIsEditing(false); // Sale del modo de edición después de guardar los cambios
+        onUserUpdate(); // Actualiza la lista de usuarios después de la edición
       } else {
         console.error('Failed to update user');
       }

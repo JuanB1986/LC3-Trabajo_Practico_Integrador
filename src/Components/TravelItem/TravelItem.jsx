@@ -5,18 +5,21 @@ const TravelItem = ({ travelId, origin, destination, date, time, availableSeats,
 
     const role = localStorage.getItem('role');
 
+    // Maneja la reserva de un viaje
     const handleReserve = () => {
         if (window.confirm("¿Está seguro de que desea reservar este viaje?")) {
             onReserve(travelId);
         }
     };
 
+    // Maneja la eliminación de un viaje
     const handleDelete = () => {
         if (window.confirm("¿Está seguro de que desea eliminar este viaje?")) {
             onDelete(travelId);
         }
     };
 
+    // Maneja la cancelación de un viaje
     const handleCancel = () => {
         if (window.confirm("¿Está seguro de que desea cancelar este viaje?")) {
             onCancel(travelId);

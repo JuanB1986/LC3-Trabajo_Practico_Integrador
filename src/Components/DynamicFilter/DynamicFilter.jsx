@@ -8,7 +8,7 @@ const DynamicFilter = ({ fields, onSearch }) => {
 
   const [filters, setFilters] = useState({});
 
-
+  // Actualiza los filtros cuando el usuario cambia un valor
   const handleChange = (field, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -16,7 +16,7 @@ const DynamicFilter = ({ fields, onSearch }) => {
     }));
   };
 
-  // Manejar la acción de búsqueda
+  // Llama a la función onSearch cuando el usuario realiza la búsqueda
   const handleSearch = () => {
     onSearch(filters);
   };

@@ -20,6 +20,7 @@ const DriverRegisterForm = () => {
   const [licensePlate, setLicensePlate] = useState('');
   const [capacity, setCapacity] = useState('');
 
+  // Maneja el envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -40,6 +41,8 @@ const DriverRegisterForm = () => {
     };
 
     try {
+
+      // Petición para registrar al conductor en la API
       const response = await fetch("https://localhost:7080/api/Driver", {
         method: 'POST',
         headers: {
@@ -61,13 +64,13 @@ const DriverRegisterForm = () => {
     }
   };
 
+  // Función para navegar de vuelta a la página anterior o al inicio de sesión
   const handleHome = () => {
     const rol = localStorage.getItem("role")
-    if (rol=="Admin")
-    {
-        navigate("/admin")
+    if (rol == "Admin") {
+      navigate("/admin")
     }
-    else{
+    else {
       navigate("/iniciar-sesion")
     }
   }

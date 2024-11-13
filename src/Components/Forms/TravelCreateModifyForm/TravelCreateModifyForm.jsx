@@ -1,16 +1,16 @@
-import styles from './TravelCreateModifyForm.module.css'
+import styles from './TravelCreateModifyForm.module.css';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const TravelCreateModifyForm = () => {
-
+const TravelCreateModifyForm = ({ setTravels }) => {
   const [travelId, setTravelId] = useState('');
   const [startDirection, setStartDirection] = useState('');
   const [endDirection, setEndDirection] = useState('');
   const [StartDate, setStartDate] = useState('');
   const [StartHour, setStartHour] = useState('');
   const [price, setPrice] = useState('');
-  const [option, setOption] = useState(false)
-  const [inputIdType, setInputIdType] = useState("hidden")
+  const [option, setOption] = useState(false);
+  const [inputIdType, setInputIdType] = useState("hidden");
   const [message, setMessage] = useState("");
 
   const route = "https://localhost:7080/api/Travel";
@@ -21,20 +21,14 @@ const TravelCreateModifyForm = () => {
     const driverId = localStorage.getItem("userId");
     const token = localStorage.getItem('token');
 
-    // Combina la fecha y hora en un solo valor en formato ISO
-    const startTime = new Date(
+    let startTime = new Date(
       `${StartDate.split("/").reverse().join("-")}T${StartHour}:00`
-    ).toISOString();
+    );
 
-    const travelDataModify = {
-      travelId: travelId,
-      startDirection: startDirection,
-      endDirection: endDirection,
-      startTime: startTime,
-      price: price,
-    };
+    startTime.setHours(startTime.getHours() - 3);
+    startTime = startTime.toISOString();
 
-    const travelDataCreate = {
+    const travelData = {
       driverId: driverId,
       startDirection: startDirection,
       endDirection: endDirection,
@@ -43,47 +37,75 @@ const TravelCreateModifyForm = () => {
     };
 
     try {
-
-      const response = await fetch(option == false ? route : route + "/" + travelId,
-        {
-          method: option == false ? 'POST' : 'PUT',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(option == false ? travelDataCreate : travelDataModify),
-        });
+      const response = await fetch(option ? `${route}/${travelId}` : route, {
+        method: option ? 'PUT' : 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(travelData),
+      });
 
       if (!response.ok) {
-        messageHandler("Error del servidor")
+        messageHandler("Error del servidor");
         throw new Error('Error en la red');
       }
 
-      const data = await response.json();
-      console.log('Datos enviados:', data);
-      messageHandler("Modificado / Creado correctamente")
+      // Si la creación/modificación es exitosa, obtener la lista actualizada de viajes
+      const updatedTravelsResponse = await fetch('https://localhost:7080/api/Driver/' + driverId + '/travels', {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          accept: 'application/json',
+        },
+      });
 
-    } catch {
-      messageHandler("Error al enviar los datos")
+      const updatedTravels = await updatedTravelsResponse.json();
+
+      // Mapea y ordena los viajes antes de almacenarlos en el estado
+      const listadotravels = updatedTravels
+        .map((travel) => ({
+          travelId: travel.id,
+          origin: travel.startDirection,
+          destination: travel.endDirection,
+          date: travel.date,
+          time: travel.time,
+          availableSeats: travel.availableSeats,
+          price: travel.price,
+          status: travel.status,
+        }))
+        .sort((a, b) => a.travelId - b.travelId);
+
+      // Actualiza la lista de viajes en el componente principal
+      setTravels(listadotravels);
+
+      // Mensaje de éxito
+      messageHandler("Modificado / Creado correctamente");
+
+    } catch (error) {
+      messageHandler({error} + "Error al enviar los datos");
     }
   };
 
-  const handlerOption1 = () => { //nuevo viaje sin ID
-    setOption(false)
-    setInputIdType("hidden")
-  }
+  // Cambia la opción a "Nuevo Viaje" (sin ID)
+  const handlerOption1 = () => {
+    setOption(false);
+    setInputIdType("hidden");
+  };
 
-  const handlerOption2 = () => { //Modificar viaje con ID por path
-    setOption(true)
-    setInputIdType("text")
-  }
+  // Cambiar la opción a "Modificar Viaje" (con ID)
+  const handlerOption2 = () => {
+    setOption(true);
+    setInputIdType("text");
+  };
 
+  // Función para mostrar mensajes de éxito o error
   const messageHandler = (mens) => {
-    setMessage(mens)
+    setMessage(mens);
     setTimeout(() => {
-      setMessage("")
+      setMessage("");
     }, 2500);
-  }
+  };
 
   return (
     <div className={styles.Form_fondo}>
@@ -92,6 +114,7 @@ const TravelCreateModifyForm = () => {
 
         <form onSubmit={handleSubmit}>
 
+          {/* Opciones para seleccionar si es un nuevo viaje o modificar un viaje */}
           <div className={styles.Form_option_contenedor}>
 
             <span className={styles.Form_option_span}>
@@ -105,6 +128,7 @@ const TravelCreateModifyForm = () => {
             </span>
           </div>
 
+          {/* Formulario para ingresar los detalles del viaje */}
           <input type={inputIdType} className={styles.Form_input} onChange={(e) => setTravelId(e.target.value)} required placeholder='Nº de Viaje' />
           <input type="text" className={styles.Form_input} onChange={(e) => setStartDirection(e.target.value)} required placeholder='Origen' />
           <input type="text" className={styles.Form_input} onChange={(e) => setEndDirection(e.target.value)} required placeholder='Destino' />
@@ -112,10 +136,16 @@ const TravelCreateModifyForm = () => {
           <input type="text" className={styles.Form_input} onChange={(e) => setStartHour(e.target.value)} required placeholder='Hora (hh:mm)' />
           <input type="text" className={styles.Form_input} onChange={(e) => setPrice(e.target.value)} required placeholder='Precio' />
           <button className={styles.Form_loginButton} type="submit">Enviar</button>
+          
           <p className={styles.Form_message}>{message}</p>
         </form>
       </div>
     </div>
-  )
-}
-export default TravelCreateModifyForm
+  );
+};
+
+TravelCreateModifyForm.propTypes = {
+  setTravels: PropTypes.func.isRequired, // La función que se usará para actualizar la lista de viajes
+};
+
+export default TravelCreateModifyForm;

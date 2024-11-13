@@ -13,6 +13,7 @@ const DriverRegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Maneja el envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -27,6 +28,8 @@ const DriverRegisterForm = () => {
     };
 
     try {
+            
+      // Petición para registrar al pasajero en la API
       const response = await fetch("https://localhost:7080/api/Passenger", {
         method: 'POST',
         headers: {
@@ -48,10 +51,7 @@ const DriverRegisterForm = () => {
     }
   };
 
-  const handleHome = () => {
-
-    navigate("/iniciar-sesion")
-  }
+  const handleHome = () => {navigate("/iniciar-sesion")}
 
   return (
     <div className={styles.Login_fondo}>
@@ -81,7 +81,7 @@ const DriverRegisterForm = () => {
           </form>
         </div>
       </div>
-    </div>  
+    </div>
   )
 }
 
